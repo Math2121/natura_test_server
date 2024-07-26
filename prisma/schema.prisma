@@ -20,4 +20,12 @@ model Product {
   price       Float
   quantity    Int
   image       String
+  Cart        Cart[]
+}
+
+model Cart {
+  id Int @id @default(autoincrement())
+  productId Int
+  quantity  Int
+  product Product @relation(fields: [productId], references: [id])
 }
