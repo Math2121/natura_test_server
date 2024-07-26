@@ -35,7 +35,7 @@ export class CartService {
             
         } catch (error) {
             this.logger.error('Error create product', error);
-            throw new InternalServerErrorException('An error occurred');
+            throw new InternalServerErrorException(error);
         }
 
     }
