@@ -1,0 +1,33 @@
+###
+
+POST http://localhost:3000/products
+content-type: application/json
+
+{
+    "name": "Product1",
+    "price": 10.99,
+    "quantity": 100,
+    "image":"github.com/Math2121/images",
+    "description":"https://production.na01.natura.com/on/demandware.static/-/Sites-natura-br-storefront-catalog/default/dw362239d1/NATBRA-53255_1.jpg"
+}
+
+####
+
+GET http://localhost:3000/products
+
+####
+
+GET http://localhost:3000/products/search?name=Product
+
+
+###
+
+POST http://localhost:3000/cart
+content-type: application/json
+
+{
+    "items": [{
+        "productId":1,
+        "quantity":2
+    }]
+}
