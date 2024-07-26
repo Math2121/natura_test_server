@@ -5,7 +5,7 @@ import { InputCreateProductDto } from './dto/product.dto';
 @Injectable()
 export class ProductsService {
     private readonly logger = new Logger(ProductsService.name);
-    constructor(private prismaService: PrismaService){}
+    constructor(private prismaService: PrismaService) { }
 
     async createProduct(input: InputCreateProductDto) {
 
@@ -19,9 +19,28 @@ export class ProductsService {
                     image: input.image
                 }
             });
-            
+
         } catch (error) {
-            this.logger.error('Error fetching user', error);
+            this.logger.error('Error create product', error);
+            throw new InternalServerErrorException('An error occurred');
+        }
+    }
+
+    async getProducts(page: number = 1, pageSize: number = 10) {
+        try {
+            const products = await this.prismaService.product.findMany({
+                skip: (page - 1) * pageSize,
+                take: pageSize,
+            });
+            const total = await this.prismaService.product.count();
+            return {
+                data: products,
+                total,
+                page,
+                pageSize,
+            };
+        } catch (error) {
+            this.logger.error('Error fetching products', error);
             throw new InternalServerErrorException('An error occurred');
         }
     }
