@@ -13,4 +13,9 @@ export const prismaMock = {
       update: jest.fn().mockResolvedValue(fakeCart[0]),
       delete: jest.fn(), 
     },
+    product: {
+      findUnique: jest.fn().mockResolvedValue({ id: 1, quantity: 10 }),
+      update: jest.fn(),
+    },
+
   };
