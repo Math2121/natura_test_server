@@ -15,10 +15,42 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/products (POST)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .post('/products')
+      .send({ name: 'Test Product', price: 10, quantity: 10, description: 'Test', image: 'test' })
+      .expect(201)
+      .expect(({ body }) => {
+        expect(body).toEqual({
+          message: "Product created successfully"
+        });
+      });
+
+
+  })
+  it('/products (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/products')
       .expect(200)
-      .expect('Hello World!');
+      .expect(({ body }) => {
+        expect(Array.isArray(body.data)).toBeTruthy();
+      });
+
+  })
+
+  it('/products?name=product (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/products?name=Test Product')
+      .expect(200)
+      .expect(({ body }) => {
+        expect(Array.isArray(body.data)).toBeTruthy();
+        expect(body.data.length).toBeGreaterThan(0);
+      });
+
+  })
+
+  afterAll(async () => {
+    await app.close();
   });
+
 });
