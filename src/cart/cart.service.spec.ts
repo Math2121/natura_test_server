@@ -1,8 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CartService } from './cart.service';
-import { PrismaClient } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { DeepMockProxy } from 'jest-mock-extended';
 import { prismaMock } from './mock/prismaMock';
 
 
