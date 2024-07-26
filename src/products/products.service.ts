@@ -44,4 +44,21 @@ export class ProductsService {
             throw new InternalServerErrorException('An error occurred');
         }
     }
+
+    async getProductByName(name: string) {
+        try {
+            let products = await this.prismaService.product.findMany({
+                where: {
+                    name: {
+                        contains: name, 
+                    },
+                },
+            });
+        
+            return products
+        } catch (error) {
+            this.logger.error('Error fetching product by name', error);
+            throw new InternalServerErrorException('An error occurred');
+        }
+    }
 }

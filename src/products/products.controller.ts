@@ -23,4 +23,11 @@ export class ProductsController {
         return products;
     }
 
+    @Get('search')
+    @HttpCode(200)
+    async getProductById(@Query('name') name: string) {
+        const product = await this.productsService.getProductByName(name);
+        return product;
+    }
+
 }
