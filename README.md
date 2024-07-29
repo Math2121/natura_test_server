@@ -13,4 +13,4 @@ npm run dev
 
 # Documentção da API
 
-- http://localhost:3000/api
+- https://natura-test-server.onrender.com/api
